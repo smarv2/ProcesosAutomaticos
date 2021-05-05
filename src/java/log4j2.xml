@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="basePath">/applogs/</Property>
+        <Property name="logName">ProcesosAutomaticos</Property>
+        <!--Property name="logNameDos">testeLogDos</Property-->
+    </Properties>
+ 
+    <Appenders>
+        <!-- Primer LOG -->        
+        <RollingFile name="RollingFileMain" fileName="${basePath}${logName}.log" filePattern="${basePath}${logName}-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - [%-5p]-(%F, Linea:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${basePath}" maxDepth="1">
+                    <IfFileName glob="${logName}-????-??-??.log">
+                        <IfAny>
+                            <IfAccumulatedFileCount exceeds="5" />
+                        </IfAny>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <!-- Segundo LOG -->
+        <!--RollingFile name="RollingFileMainDos" fileName="${basePath}${logNameDos}.log" filePattern="${basePath}${logNameDos}-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - [%-5p]-(%F, Linea:%L) - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${basePath}" maxDepth="1">
+                    <IfFileName glob="${logNameDos}-????-??-??.log">
+                        <IfAny>
+                            <IfAccumulatedFileCount exceeds="5" />
+                        </IfAny>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile-->
+ 
+        <Console name="console" target="SYSTEM_OUT">
+            <!--PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" /-->
+            <PatternLayout   pattern="%d{yyyy-MM-dd HH:mm:ss} - [%-5p]-(%F, Linea:%L) - %m%n" />
+        </Console>
+    </Appenders>
+    
+    <Loggers>
+        <!-- LOG Uno-->
+        <Logger name="com.mx.digital.stone.pa" level="debug" additivity="true">
+            <appender-ref ref="RollingFileMain" level="debug" />
+        </Logger>
+        <!-- LOG Dos-->
+        <!--Logger name="com.mx.mario.otraclase" level="debug" additivity="true">
+            <appender-ref ref="RollingFileMainDos" level="debug" />
+        </Logger-->
+        <Root level="debug" additivity="false">
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
