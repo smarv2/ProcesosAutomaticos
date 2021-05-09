@@ -1,0 +1,5 @@
+//db procesos automaticos
+DROP TABLE mensajes_mail;
+CREATE TABLE mensajes_mail (idMensajesMail int NOT NULL AUTO_INCREMENT, destinatarios varchar(255) COLLATE utf8_unicode_ci NOT NULL, respondera varchar(255) COLLATE utf8_unicode_ci NOT NULL,asunto varchar(255) COLLATE utf8_unicode_ci NOT NULL, adjuntos varchar(255) COLLATE utf8_unicode_ci, mensaje varchar(255) COLLATE utf8_unicode_ci NOT NULL, fechaRegistro datetime NOT NULL, fechaEnvio datetime, enviado smallint DEFAULT '0' NOT NULL, PRIMARY KEY (idMensajesMail)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO mensajes_mail (idMensajesMail, destinatarios, respondera, asunto, adjuntos, mensaje, fechaRegistro, fechaEnvio, enviado) VALUES (1, 'smarv2@gmail.com', 'ventas@mitienda.com', 'Prueba de responder A', null, 'Mensaje de prueba', '2021-05-08 21:26:59', null, 0);
