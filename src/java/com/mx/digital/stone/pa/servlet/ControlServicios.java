@@ -5,7 +5,7 @@
  */
 package com.mx.digital.stone.pa.servlet;
 
-import com.mx.digital.stone.pa.EnviaCorreoFacade;
+import com.mx.digital.stone.pa.EnviaCorreoHilo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,7 +48,7 @@ public class ControlServicios extends HttpServlet {
         }
         
         if (StrIDProcess.compareToIgnoreCase("1") == 0) {
-            EnviaCorreoFacade enviaCorreoFacade = new EnviaCorreoFacade();
+            EnviaCorreoHilo enviaCorreoFacade = new EnviaCorreoHilo();
             // Genera Reportes
             if (StrAction.compareToIgnoreCase("1") == 0) {
                 LOG.info(" --------------------------------------- SE INICIA ENVIO DE CORREOS - P/A --------------------------------------- ");

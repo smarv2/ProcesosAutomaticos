@@ -36,8 +36,8 @@ public class TimerEnviaCorreo extends TimerTask {
     }
 
     private synchronized static void Genera() {
-        if (EnviaCorreoFacade.getEstatus() == true) {
-            EnviaCorreoFacade.EnviaCorreos();
+        if (EnviaCorreoHilo.getEstatus() == true) {
+            EnviaCorreoHilo.EnviaCorreos();
             Start();
         }
     }
@@ -54,7 +54,7 @@ public class TimerEnviaCorreo extends TimerTask {
                 calendario.get(Calendar.MINUTE) + 1,
                 calendario.get(Calendar.SECOND));
         //System.out.println("Fecha Hora proxima ejecucion : " + calendario.DATE);
-        LOG.info("Fecha Hora proxima ejecucion : " + calendario.DATE);
+        //LOG.info("Fecha Hora proxima ejecucion : " + calendario.DATE);
         return result.getTime();
     }
 }

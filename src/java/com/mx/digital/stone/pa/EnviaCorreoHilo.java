@@ -5,6 +5,7 @@
  */
 package com.mx.digital.stone.pa;
 
+import com.mx.digital.stone.pa.blogic.EnviaCorreoFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,14 +13,14 @@ import org.apache.logging.log4j.Logger;
  *
  * @author smarv
  */
-public class EnviaCorreoFacade {
+public class EnviaCorreoHilo {
     
-    protected static final Logger LOG = LogManager.getLogger(EnviaCorreoFacade.class);
+    protected static final Logger LOG = LogManager.getLogger(EnviaCorreoHilo.class);
     
     private static boolean isStarted = false;
     
 
-    public EnviaCorreoFacade() {}
+    public EnviaCorreoHilo() {}
 
     public static boolean getEstatus() {
         return isStarted;
@@ -27,6 +28,8 @@ public class EnviaCorreoFacade {
     
     public static synchronized void EnviaCorreos() {
         LOG.info("************ ENVIANDO CORREOS *************");
+        EnviaCorreoFacade enviaCorreoFacade = new EnviaCorreoFacade();
+        enviaCorreoFacade.enviaCorreos();
     }
     
      public static void Start() {
