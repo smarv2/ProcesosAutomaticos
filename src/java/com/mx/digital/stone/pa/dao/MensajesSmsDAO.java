@@ -1,12 +1,7 @@
-/*
- * (#)MensajesMailDAO.java 1.00 04/01/2018
- * 
- * Copyright (c) 2018 SURA Mexico. Derechos reservados. https://www.suramexico.com/afore/
- */
 package com.mx.digital.stone.pa.dao;
 
 import com.mx.digital.stone.pa.utils.ConexionMySQL;
-import com.mx.digital.stone.pa.vo.MensajesMailVO;
+import com.mx.digital.stone.pa.vo.MensajesSmsVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,28 +11,27 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * 	Mario Alan Ramirez Vazquez.
- *	@author MXI01020253A
- *      @version 1.00, 04/01/2018
+ * 
+ * @author smarv
  */
-public class MensajesMailDAO {
+public class MensajesSmsDAO {
 
     /**
      * Campo LOG de tipo Logger.
      */
-    protected static final Logger LOG = LogManager.getLogger(MensajesMailDAO.class);
+    protected static final Logger LOG = LogManager.getLogger(MensajesSmsDAO.class);
     
 
     /**
      * Campo OBTEN_MENSAJES_SIN_ENVIAR de tipo String.
      */
-    private static final String OBTEN_MENSAJES_SIN_ENVIAR = "select * from mensajes_mail where enviado = 0 LIMIT 5";
+    private static final String OBTEN_MENSAJES_SIN_ENVIAR = "select * from mensajes_sms where enviado = 0 LIMIT 5";
 
     /**
      * Campo ACTUALIZA_MENSAJES_MAIL de tipo String.
      */
-    private static final String ACTUALIZA_MENSAJES_MAIL = "update mensajes_mail set enviado = ?, fechaEnvio = NOW() "
-            + "where idMensajeMail = ?";
+    private static final String ACTUALIZA_MENSAJES_MAIL = "update mensajes_sms set enviado = ?, fechaEnvio = NOW() "
+            + "where idMensajeSms = ?";
 
     /**
      * Metodo que obtiene los reguistros de datos personales.
@@ -45,9 +39,9 @@ public class MensajesMailDAO {
      * @return List {@code List<MensajesMailVO>}
      * @throws Exception en caso de error.
      */
-    public final List<MensajesMailVO> getCorreosSinEnviar() throws Exception {
+    public final List<MensajesSmsVO> getSmsSinEnviar() throws Exception {
 
-        List<MensajesMailVO> list = new ArrayList<MensajesMailVO>();
+        List<MensajesSmsVO> list = new ArrayList<MensajesSmsVO>();
         ConexionMySQL mysql = new ConexionMySQL();
         Connection con = mysql.conectar();
 
@@ -62,12 +56,9 @@ public class MensajesMailDAO {
             //System.out.println("ps: " + ps);
             rs = ps.executeQuery();
             while (rs.next()) {
-                MensajesMailVO vo = new MensajesMailVO();
-                vo.setIdMensajesMail(rs.getInt("idMensajeMail"));
-                vo.setDestinatarios(rs.getString("destinatarios"));
-                vo.setRespondera(rs.getString("respondera"));
-                vo.setAsunto(rs.getString("asunto"));
-                vo.setAdjuntos(rs.getString("adjuntos"));
+                MensajesSmsVO vo = new MensajesSmsVO();
+                vo.setIdMensajeSms(rs.getInt("idMensajeSms"));
+                vo.setDestinatario(rs.getString("destinatario"));
                 vo.setMensaje(rs.getString("mensaje"));
                 vo.setFechaRegistro(rs.getDate("fechaRegistro"));
                 vo.setFechaEnvio(rs.getDate("fechaEnvio"));
@@ -77,7 +68,7 @@ public class MensajesMailDAO {
 
         } catch (Exception e) {
             LOG.error("No se pudo obtener el detalle de BD: " + e);
-            throw new Exception("Error en getCorreosSinEnviar()", e);
+            throw new Exception("Error en getSmsSinEnviar()", e);
         } finally {
             try {
                 if (rs != null) {
@@ -103,8 +94,8 @@ public class MensajesMailDAO {
      * @param idMensaje {@code int}
      * @throws Exception en caso de error.
      */
-    public final void actualizaMensajesMail(final int enviado, final int idMensaje) throws Exception {
-        LOG.info("Actualizando mensajes mail.");
+    public final void actualizaMensajesSms(final int enviado, final int idMensaje) throws Exception {
+        LOG.info("Actualizando mensajes sms.");
         ConexionMySQL mysql = new ConexionMySQL();
         Connection con = mysql.conectar();
 
@@ -122,7 +113,7 @@ public class MensajesMailDAO {
             ps.execute();
         } catch (Exception e) {
             LOG.error("No se pudo obtener el detalle de BD: " + e);
-            throw new Exception("Error en actualizaMensajesMail()");
+            throw new Exception("Error en actualizaMensajesSms()");
         } finally {
             try {
                 if (rs != null) {

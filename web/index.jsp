@@ -3,7 +3,7 @@
     Created on : 4/05/2021, 08:16:25 PM
     Author     : smarv
 --%>
-<%@ page contentType="text/html; charset=iso-8859-1" language="java" import="com.mx.digital.stone.pa.EnviaCorreoHilo" errorPage="" %>
+<%@ page contentType="text/html; charset=iso-8859-1" language="java" import="com.mx.digital.stone.pa.blogic.EnviaCorreoHilo, com.mx.digital.stone.pa.blogic.EnviaSmsHilo" errorPage="" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +16,7 @@
             <input name='Action' id='Action' type='hidden'>
             <table>
                 <tr>
-                    <td>Envío de Reportes</td>
+                    <td>Envío de Correos</td>
                     
                     <% if (EnviaCorreoHilo.getEstatus()) { %>
                         <td>Estatus: <b> <font color="GREEN">Iniciado</font></b></td>
@@ -29,6 +29,22 @@
                         <td><input onClick='document.all.IDProcess.value = 1; document.all.Action.value = 0' type='submit' value='Detener'></input></td>
                     <%} else {%>
                         <td><input onClick='document.all.IDProcess.value = 1; document.all.Action.value = 1' type='submit' value='Iniciar'></input></td>
+                    <%}%> 
+                </tr>
+                <tr>
+                    <td>Envío de Sms's</td>
+                    
+                    <% if (EnviaSmsHilo.getEstatus()) { %>
+                        <td>Estatus: <b> <font color="GREEN">Iniciado</font></b></td>
+                    <%} else {%>
+                        <td>Estatus: <b> <font color="RED">Detenido</font></b></td>
+                    <%}%> 
+                </tr>
+                <tr>
+                    <% if (EnviaSmsHilo.getEstatus()) { %>
+                        <td><input onClick='document.all.IDProcess.value = 2; document.all.Action.value = 0' type='submit' value='Detener'></input></td>
+                    <%} else {%>
+                        <td><input onClick='document.all.IDProcess.value = 2; document.all.Action.value = 1' type='submit' value='Iniciar'></input></td>
                     <%}%> 
                 </tr>
             </table>

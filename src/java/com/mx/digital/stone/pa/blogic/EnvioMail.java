@@ -23,12 +23,12 @@ import org.apache.logging.log4j.Logger;
  *	@author MXI01020253A
  *      @version 1.00, 04/01/2018
  */
-public class EnvioMailFacade {
+public class EnvioMail {
     
     /**
      * Campo LOG de tipo Logger.
      */
-    protected static final Logger LOG = LogManager.getLogger(EnvioMailFacade.class);
+    protected static final Logger LOG = LogManager.getLogger(EnvioMail.class);
     
     /**
      * Metodo SendMail.

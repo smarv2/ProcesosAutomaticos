@@ -48,7 +48,7 @@ public class EnviaCorreoFacade {
     
     private void enviaCorreos(final List<MensajesMailVO> listaMensajes) throws Exception {
         MensajesMailDAO mensajesMailDAO = new MensajesMailDAO();
-        EnvioMailFacade envioMailFacade = new EnvioMailFacade();
+        EnvioMail envioMailFacade = new EnvioMail();
         //Se itera la lista
         for (MensajesMailVO mensajesMailVO : listaMensajes) {
             try {

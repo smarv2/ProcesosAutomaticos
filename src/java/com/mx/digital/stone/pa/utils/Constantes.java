@@ -34,4 +34,18 @@ public class Constantes {
 	 */
         public static final String FROM_SMTP = "robot@digitalstonemx.com";
 
+        //SMS
+        public static final String URL_API_ALTIRA = "http://www.altiria.net/api/http";
+        public static final String ALTIRA_PARAM_CMD = "sendsms";
+        public static final String ALTIRA_PARAM_USER = "marioniwolfx@gmail.com";
+        public static final String ALTIRA_PARAM_PASSWORD = "Mr5w4Pr2";
+        //DB
+        public static final String DB_HOST = "192.168.1.79";
+        public static final String DB = "procesos_automaticos";
+        public static final String DB_USER = "remoto";
+        public static final String DB_PASSWORD = "remotopass";
+        
+        
+        
+        
 }

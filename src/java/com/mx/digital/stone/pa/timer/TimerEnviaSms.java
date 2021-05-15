@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mx.digital.stone.pa;
+package com.mx.digital.stone.pa.timer;
 
+import com.mx.digital.stone.pa.blogic.EnviaSmsHilo;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -17,18 +18,18 @@ import org.apache.logging.log4j.Logger;
  *
  * @author smarv
  */
-public class TimerEnviaCorreo extends TimerTask {
+public class TimerEnviaSms extends TimerTask {
     
-    protected static final Logger LOG = LogManager.getLogger(TimerEnviaCorreo.class);
+    protected static final Logger LOG = LogManager.getLogger(TimerEnviaSms.class);
     
     /* Creates a new instance of TimerEnviaCorreo */
-    public TimerEnviaCorreo() {
+    public TimerEnviaSms() {
     }
     private static Timer Reloj = new Timer();
 
     public static void Start() {
-        TimerTask TimerEnviaCorreo = new TimerEnviaCorreo();
-        Reloj.schedule(TimerEnviaCorreo, getNextExec());
+        TimerTask timerEnviaSms = new TimerEnviaSms();
+        Reloj.schedule(timerEnviaSms, getNextExec());
     }
 
     public void run() {
@@ -36,8 +37,8 @@ public class TimerEnviaCorreo extends TimerTask {
     }
 
     private synchronized static void Genera() {
-        if (EnviaCorreoHilo.getEstatus() == true) {
-            EnviaCorreoHilo.EnviaCorreos();
+        if (EnviaSmsHilo.getEstatus() == true) {
+            EnviaSmsHilo.EnviaSmss();
             Start();
         }
     }

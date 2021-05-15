@@ -5,7 +5,8 @@
  */
 package com.mx.digital.stone.pa.servlet;
 
-import com.mx.digital.stone.pa.EnviaCorreoHilo;
+import com.mx.digital.stone.pa.blogic.EnviaCorreoHilo;
+import com.mx.digital.stone.pa.blogic.EnviaSmsHilo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -49,7 +50,6 @@ public class ControlServicios extends HttpServlet {
         
         if (StrIDProcess.compareToIgnoreCase("1") == 0) {
             EnviaCorreoHilo enviaCorreoFacade = new EnviaCorreoHilo();
-            // Genera Reportes
             if (StrAction.compareToIgnoreCase("1") == 0) {
                 LOG.info(" --------------------------------------- SE INICIA ENVIO DE CORREOS - P/A --------------------------------------- ");
                 enviaCorreoFacade.Start();
@@ -58,6 +58,19 @@ public class ControlServicios extends HttpServlet {
                 LOG.info(" --------------------------------------- SE DETIENE ENVIO DE CORREOS - P/A --------------------------------------- ");
                 enviaCorreoFacade.Stop();
             }
+        } else {
+            if (StrIDProcess.compareToIgnoreCase("2") == 0) {
+            EnviaSmsHilo enviaSmsHilo = new EnviaSmsHilo();
+            if (StrAction.compareToIgnoreCase("1") == 0) {
+                LOG.info(" --------------------------------------- SE INICIA ENVIO DE SMS'S - P/A --------------------------------------- ");
+                enviaSmsHilo.Start();
+            }
+            if (StrAction.compareToIgnoreCase("0") == 0) {
+                LOG.info(" --------------------------------------- SE DETIENE ENVIO DE SMS'S - P/A --------------------------------------- ");
+                enviaSmsHilo.Stop();
+            }
+        }
+        
         }
 
         out.print("<HTML><body><script>location.href='index.jsp';window.close()</script></body></html>");

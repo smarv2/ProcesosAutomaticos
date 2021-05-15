@@ -1,5 +1,28 @@
-//db procesos automaticos
-DROP TABLE mensajes_mail;
-CREATE TABLE mensajes_mail (idMensajesMail int NOT NULL AUTO_INCREMENT, destinatarios varchar(255) COLLATE utf8_unicode_ci NOT NULL, respondera varchar(255) COLLATE utf8_unicode_ci NOT NULL,asunto varchar(255) COLLATE utf8_unicode_ci NOT NULL, adjuntos varchar(255) COLLATE utf8_unicode_ci, mensaje varchar(255) COLLATE utf8_unicode_ci NOT NULL, fechaRegistro datetime NOT NULL, fechaEnvio datetime, enviado smallint DEFAULT '0' NOT NULL, PRIMARY KEY (idMensajesMail)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+drop table mensajes_mail;
+drop table mensajes_sms;
 
-INSERT INTO mensajes_mail (idMensajesMail, destinatarios, respondera, asunto, adjuntos, mensaje, fechaRegistro, fechaEnvio, enviado) VALUES (1, 'smarv2@gmail.com', 'ventas@mitienda.com', 'Prueba de responder A', null, 'Mensaje de prueba', '2021-05-08 21:26:59', null, 0);
+CREATE TABLE `mensajes_mail` (
+  `idMensajeMail` int(11) NOT NULL AUTO_INCREMENT,
+  `destinatarios` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `respondera` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `asunto` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `adjuntos` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mensaje` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `fechaRegistro` datetime NOT NULL,
+  `fechaEnvio` datetime DEFAULT NULL,
+  `enviado` smallint(6) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idMensajeMail`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mensajes_sms` (
+  `idMensajeSms` int(11) NOT NULL AUTO_INCREMENT,
+  `destinatario` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `mensaje` varchar(160) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `fechaRegistro` datetime NOT NULL,
+  `fechaEnvio` datetime DEFAULT NULL,
+  `enviado` smallint(6) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idMensajeSms`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+INSERT INTO mensajes_mail VALUES (1, 'mario.ramireza@suramexico.com','mario.ramireza@suramexico.com' , 'Asunto Prueba', null, 'ola, prueba de envio de correo', '2018-01-04 00:00:00', '2018-01-04 16:25:41', 1);
+INSERT INTO mensajes_sms (idMensajeSms, destinatario, mensaje, fechaRegistro, fechaEnvio, enviado) VALUES (1, '5531750509', 'Mensaje desde PA', '2021-05-08 21:26:59', null, 0);

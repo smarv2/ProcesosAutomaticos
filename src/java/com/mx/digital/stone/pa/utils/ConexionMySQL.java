@@ -26,11 +26,11 @@ public class ConexionMySQL {
 	/**
 	 * Campo DB de tipo String.
 	 */
-	public static final String DB = "procesos_automaticos";
+	public static final String DB = Constantes.DB;
         /**
 	 * Campo HOST de tipo String.
 	 */
-        public static final String HOST = "192.168.1.79";
+        public static final String HOST = Constantes.DB_HOST;
 	/**
 	 * Campo URL de tipo String.
 	 */
@@ -38,11 +38,11 @@ public class ConexionMySQL {
 	/**
 	 * Campo USER de tipo String.
 	 */
-	public static final String USER = "remoto";
+	public static final String USER = Constantes.DB_USER;
 	/**
 	 * Campo PASS de tipo String.
 	 */
-	public static final String PASS = "remotopass";
+	public static final String PASS = Constantes.DB_PASSWORD;
 
 	/*
 	 * public ConexionMySQL() { }
@@ -53,7 +53,7 @@ public class ConexionMySQL {
 	 * 
 	 * @return link
 	 */
-	public final Connection conectar() {
+	public final Connection conectar() throws Exception {
 		Connection link = null;
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
@@ -61,6 +61,7 @@ public class ConexionMySQL {
 			//LOG.info("Conexion exitosa.");
 		} catch (Exception e) {
 			LOG.error("Error al realiar la conexion: " + e);
+                        throw new Exception("Error al realiar la conexion a BD.");
 		}
 		return link;
 	}

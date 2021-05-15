@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mx.digital.stone.pa;
+package com.mx.digital.stone.pa.blogic;
 
+import com.mx.digital.stone.pa.timer.TimerEnviaCorreo;
 import com.mx.digital.stone.pa.blogic.EnviaCorreoFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
