@@ -52,7 +52,7 @@ public class MensajesSmsDAO {
 
         try {
             ps = con.prepareStatement(sql);
-            LOG.info("ps: " + ps);
+            //LOG.info("ps: " + ps);
             //System.out.println("ps: " + ps);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -109,7 +109,7 @@ public class MensajesSmsDAO {
             ps.setInt(1, enviado);
             ps.setInt(2, idMensaje);
             //System.out.println("ps: " + ps);
-            LOG.info(ps);
+            //LOG.info(ps);
             ps.execute();
         } catch (Exception e) {
             LOG.error("No se pudo obtener el detalle de BD: " + e);
