@@ -1,10 +1,12 @@
 package com.mx.digital.stone.pa.dao;
 
+import com.mx.digital.stone.pa.exception.BlogicException;
 import com.mx.digital.stone.pa.utils.ConexionMySQL;
 import com.mx.digital.stone.pa.vo.MensajesSmsVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -66,9 +68,9 @@ public class MensajesSmsDAO {
                 list.add(vo);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             LOG.error("No se pudo obtener el detalle de BD: " + e);
-            throw new Exception("Error en getSmsSinEnviar()", e);
+            throw new BlogicException ("Error en getSmsSinEnviar()", e);
         } finally {
             try {
                 if (rs != null) {
@@ -80,8 +82,9 @@ public class MensajesSmsDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (Exception e2) {
+            } catch (SQLException e2) {
                 LOG.error("Ocurrio un error al liberar recursos: " + e2.getMessage());
+                throw new BlogicException ("Error en getSmsSinEnviar()", e2);
             }
         }
         return list;
@@ -111,9 +114,9 @@ public class MensajesSmsDAO {
             //System.out.println("ps: " + ps);
             //LOG.info(ps);
             ps.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             LOG.error("No se pudo obtener el detalle de BD: " + e);
-            throw new Exception("Error en actualizaMensajesSms()");
+            throw new BlogicException("Error en actualizaMensajesSms()");
         } finally {
             try {
                 if (rs != null) {
@@ -125,8 +128,9 @@ public class MensajesSmsDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (Exception e2) {
+            } catch (SQLException e2) {
                 LOG.error("Ocurrio un error al liberar recursos: " + e2.getMessage());
+                throw new BlogicException("Error en actualizaMensajesSms()");
             }
         }
     }

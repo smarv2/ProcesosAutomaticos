@@ -5,11 +5,9 @@
  */
 package com.mx.digital.stone.pa.blogic;
 
-import static com.mx.digital.stone.pa.blogic.EnviaCorreoFacade.LOG;
-import com.mx.digital.stone.pa.dao.MensajesMailDAO;
 import com.mx.digital.stone.pa.dao.MensajesSmsDAO;
+import com.mx.digital.stone.pa.exception.BlogicException;
 import com.mx.digital.stone.pa.utils.Constantes;
-import com.mx.digital.stone.pa.vo.MensajesMailVO;
 import com.mx.digital.stone.pa.vo.MensajesSmsVO;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +47,8 @@ public class EnviaSMSFacade {
     
      private void enviaSms(final List<MensajesSmsVO> listaMensajes) throws Exception {
         MensajesSmsDAO mensajesSmsDAO = new MensajesSmsDAO();
-        EnvioSMS envioSMS = new EnvioSMS();
+        
+        EnvioSMS envioSMS = new EnvioSMS(Constantes.COM_PORT);
         //Se itera la lista
         for (MensajesSmsVO mensajesSmsVO : listaMensajes) {
             try {
@@ -62,13 +61,20 @@ public class EnviaSMSFacade {
                 //Se actualiza a enviado exitoso.
                 mensajesSmsDAO.actualizaMensajesSms(Constantes.ENVIO_EXITOSO, mensajesSmsVO.getIdMensajeSms());
 
-            } catch (Exception e) {
+            } catch (BlogicException e) {
+                //Se actualiza a enviado con error.
+                LOG.error("No se pudo enviar el SMS" , e);
+                mensajesSmsDAO.actualizaMensajesSms(Constantes.ENVIO_FALLIDO, mensajesSmsVO.getIdMensajeSms());
+            }
+            
+            catch (Exception e) {
                 //Se actualiza a enviado con error.
                 LOG.error("No se pudo enviar el SMS" , e);
                 mensajesSmsDAO.actualizaMensajesSms(Constantes.ENVIO_FALLIDO, mensajesSmsVO.getIdMensajeSms());
             }
 
         }
+        LOG.info("Termina pool de envio de mensajes.");
     }
     
 }
